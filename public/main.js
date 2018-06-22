@@ -1,17 +1,6 @@
 console.log("Starting main script...");
 console.log("Rendering the graph");
 
-sigma.classes.graph.addMethod('neighbors', function (nodeId) {
-    var k,
-        neighbors = {},
-        index = this.allNeighborsIndex[nodeId] || {};
-
-    for (k in index)
-        neighbors[k] = this.nodesIndex[k];
-
-    return neighbors;
-});
-
 // var i,
 //     s,
 //     N = 100,
@@ -110,6 +99,53 @@ sigma.classes.graph.addMethod('neighbors', function (nodeId) {
 // });
 
 
+function loadJSON(callback) {
+
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', 'my_data.json', true); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+        }
+    };
+    xobj.send(null);
+}
+
+
+// function init() {
+//     loadJSON(function (response) {
+//         // Parse JSON string into object
+//         var g = JSON.parse(response);
+//
+//         console.log(g)
+//
+//         // Instantiate sigma:
+//         var s = new sigma({
+//                 graph: g,
+//                 container: 'container',
+//                 settings: {
+//                     defaultNodeColor: '#ec5148'
+//                 }
+//             },
+//         );
+//
+//         console.log("Done rendering...")
+//     });
+// }
+
+sigma.classes.graph.addMethod('neighbors', function (nodeId) {
+    var k,
+        neighbors = {},
+        index = this.allNeighborsIndex[nodeId] || {};
+
+    for (k in index)
+        neighbors[k] = this.nodesIndex[k];
+
+    return neighbors;
+});
+
 sigma.parsers.json('https://raw.githubusercontent.com/sroj/graphy/develop/public/arctic.json', {
         container: 'container',
         settings: {
@@ -179,4 +215,5 @@ sigma.parsers.json('https://raw.githubusercontent.com/sroj/graphy/develop/public
     }
 );
 
+// init()
 console.log("Done, bye...");
