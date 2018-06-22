@@ -1,13 +1,7 @@
 console.log("Starting main script...");
 console.log("Rendering the graph");
-// sigma.parsers.json('https://raw.githubusercontent.com/sroj/graphy/develop/public/data.json', {
-//     container: 'container',
-//     settings: {
-//         defaultNodeColor: '#ec5148'
-//     }
-// });
 
-sigma.parsers.gexf('https://raw.githubusercontent.com/sroj/graphy/develop/src/les-miserables.gexf', {
+sigma.parsers.gexf('https://raw.githubusercontent.com/sroj/graphy/develop/public/arctic.gexf', {
         container: 'container',
         settings: {
             defaultNodeColor: '#ec5148'
@@ -19,4 +13,5 @@ sigma.parsers.gexf('https://raw.githubusercontent.com/sroj/graphy/develop/src/le
         // sigma instance.
     }
 );
+
 console.log("Done, bye...");
